@@ -1,22 +1,22 @@
 import time
 
-def read_input(filename):
+def read_input(filename) -> list[str]:
     with open(filename, 'r') as f:
         return [x.rstrip('\n') for x in f.readlines()]
 
 def split_into_substrings(input: str, length: int) -> list[str]:
-    substrings = []
+    substrings: list[str] = []
     for i in range(0, len(input), length):
         substrings.append(input[i:i + length])
 
     return substrings
 
 def contains_cycle_repeated_at_least_twice(val: int) -> bool:
-    val_str = str(val)
-    num_digits = len(val_str)
+    val_str: str = str(val)
+    num_digits: int = len(val_str)
 
     for i in range(1, num_digits // 2 + 1):
-        substrings = split_into_substrings(val_str, i)
+        substrings: list[str] = split_into_substrings(val_str, i)
         if len(set(substrings)) != 1:
             continue
         if len(substrings) > 1:
@@ -28,16 +28,16 @@ def contains_cycle_repeated_at_least_twice(val: int) -> bool:
 
 
 def contains_cycle_repeated_twice(val: int) -> bool:
-    val_str = str(val)
-    num_digits = len(val_str)
+    val_str: str = str(val)
+    num_digits: int = len(val_str)
 
-    substrings = split_into_substrings(val_str, num_digits//2)
+    substrings: list[str] = split_into_substrings(val_str, num_digits//2)
     if (len(substrings) == 2) and (substrings[0] == substrings[1]):
         return True
     return False
 
 def cycle_vals_in_range(values: list[int], cycle_check_func = contains_cycle_repeated_twice) -> list[int]:
-    cycle_vals = []
+    cycle_vals: list[int] = []
 
     for val in values:
         if cycle_check_func(val):
@@ -46,12 +46,12 @@ def cycle_vals_in_range(values: list[int], cycle_check_func = contains_cycle_rep
     return cycle_vals
 
 def day1(puzzle_input: list[str]):
-    ranges = puzzle_input[0].split(',')
+    ranges: list[str] = puzzle_input[0].split(',')
 
-    all_vals_with_cycles = []
+    all_vals_with_cycles: list[int] = []
     for id_range in ranges:
         id_min, id_max = id_range.split('-')
-        range_vals = \
+        range_vals: list[int] = \
             [x for x in range(int(id_min), int(id_max) + 1) if len(str(x)) % 2 == 0]
         vals_with_cycles = cycle_vals_in_range(range_vals)
         all_vals_with_cycles.extend(vals_with_cycles)
@@ -59,14 +59,14 @@ def day1(puzzle_input: list[str]):
 
 
 def day2(puzzle_input: list[str]):
-    ranges = puzzle_input[0].split(',')
+    ranges: list[str] = puzzle_input[0].split(',')
 
-    all_vals_with_cycles = []
+    all_vals_with_cycles: list[int] = []
     for id_range in ranges:
         id_min, id_max = id_range.split('-')
-        range_vals = \
+        range_vals: list[int] = \
             [x for x in range(int(id_min), int(id_max) + 1)]
-        vals_with_cycles = \
+        vals_with_cycles: list[int] = \
             cycle_vals_in_range(range_vals, contains_cycle_repeated_at_least_twice)
         all_vals_with_cycles.extend(vals_with_cycles)
     return sum(all_vals_with_cycles)
@@ -100,7 +100,7 @@ def main():
     else:
         print("you broke day 2 test input")
         exit()
-        
+
     print("day 2, input")
     day2_start = time.time()
     sol = day2(puzzle_input)
