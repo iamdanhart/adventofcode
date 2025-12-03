@@ -16,15 +16,6 @@ def contains_cycle_repeated_at_least_twice(val: int) -> bool:
     num_digits = len(val_str)
 
     for i in range(1, num_digits // 2 + 1):
-        # print(f"cycle len: {i}")
-        # substrings = set([''.join(x) for x in itertools.combinations(val_str, i) if ''.join(x) == val_str[0:i]])
-        # print(substrings)
-        # for substr in substrings:
-        #     if len(substr) == num_digits:
-        #         return False
-        #     if substr * (num_digits // i) == val_str:
-        #         # print(f"{val} does contain a cycle {substr}")
-        #         return True
         substrings = split_into_substrings(val_str, i)
         if len(set(substrings)) != 1:
             continue
@@ -77,9 +68,7 @@ def day2(puzzle_input: list[str]):
             [x for x in range(int(id_min), int(id_max) + 1)]
         vals_with_cycles = \
             cycle_vals_in_range(range_vals, contains_cycle_repeated_at_least_twice)
-        # print(vals_with_cycles)
         all_vals_with_cycles.extend(vals_with_cycles)
-        # break
     return sum(all_vals_with_cycles)
 
 
@@ -93,6 +82,7 @@ def main():
         print("day 1 test input still correct solution")
     else:
         print("you broke day 1 test input")
+
     print("day 1, input")
     day1_start = time.time()
     sol = day1(puzzle_input)
@@ -110,6 +100,7 @@ def main():
     else:
         print("you broke day 2 test input")
         exit()
+        
     print("day 2, input")
     day2_start = time.time()
     sol = day2(puzzle_input)
