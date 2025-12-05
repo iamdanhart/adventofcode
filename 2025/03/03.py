@@ -31,12 +31,12 @@ def part2(puzzle_input: list[str]):
     for line in puzzle_input:
         vals = [int(x) for x in line]
         max_line_joltage = 0
-        for i in range(11, -1, -1):
+        for i in range(11, -1, -1): # even if biggest digit always at the end, we'll always have at least 1 digit to choose from
             line_len = len(vals)
-            possible_vals = vals[ : line_len - i ]
+            possible_vals = vals[ : line_len - i ]  # line_len is always going to be bigger than i
             max_val = max(possible_vals)
             ind_max = possible_vals.index(max_val)
-            vals = vals[ind_max + 1:]
+            vals = vals[ind_max + 1:] # most past this digit since we're
             max_line_joltage = max_line_joltage * 10 + max_val
         joltage += max_line_joltage
     return joltage
