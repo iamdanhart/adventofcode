@@ -10,6 +10,9 @@ class Grid2D:
             representation += ''.join([str(x) for x in self.grid[y]]) + "\n"
         return representation
 
+    def __getitem__(self, index):
+        return self.grid[index]
+
     def update(self, row, col, val) -> None:
         self.grid[row][col] = val
 
