@@ -1,39 +1,22 @@
+import pathlib
 import time
+
+from util.aoc_utils import read_day_input_as_lines
+from util.grid2d import Grid2D
 
 day = 4
 
-class Grid2D:
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
-        self.grid = [[0 for x in range(width)] for y in range(height)]
+script_dir = pathlib.Path(__file__).parent
 
-    def __str__(self) -> str:
-        representation = ''
-        for y in range(self.height):
-            representation += ''.join([str(x) for x in self.grid[y]]) + "\n"
-        return representation
-
-    def update(self, row, col, val) -> None:
-        self.grid[row][col] = val
-
-    def parse_input(self, input_2d, marker, val):
-        for i, row in enumerate(input_2d):
-            for j, col in enumerate(row):
-                if col == marker:
-                    self.update(i, j, val)
-
+class ChristmasPaperGrid(Grid2D):
     def count_rolls(self) -> int:
         count = 0
         for i in range(self.height):
             for j in range(self.width):
                 if self.grid[i][j] == 0:
                     continue
-                # print(f'counting adjacent roles to {i},{j}')
                 adj = self.adjacent_rolls(i, j)
-                # print(f"counted {adj} rolls")
                 if adj < 4:
-                    # print(f"{i},{j} is accessible")
                     count += 1
 
         return count
@@ -87,40 +70,35 @@ class Grid2D:
         return removable
 
 
-def read_input(filename) -> list[str]:
-    with open(filename, 'r') as f:
-        return [x.rstrip('\n') for x in f.readlines()]
-
-
 def part1(puzzle_input: list[str]):
     width = len(puzzle_input[0])
     height = len(puzzle_input)
-    grid = Grid2D(width,height)
+    grid = ChristmasPaperGrid(width,height)
     grid.parse_input(puzzle_input, '@', 1)
-    # print(grid.adjacent_rolls(0, 2))
     return grid.count_rolls()
 
 
 def part2(puzzle_input: list[str]):
     width = len(puzzle_input[0])
     height = len(puzzle_input)
-    grid = Grid2D(width, height)
+    grid = ChristmasPaperGrid(width, height)
     grid.parse_input(puzzle_input, '@', 1)
     return grid.count_removable()
 
 
 def main():
-    test_input = read_input("testinput.txt")
-    puzzle_input = read_input("input.txt")
+    test_input = read_day_input_as_lines(__file__, "testinput.txt")
+    puzzle_input = read_day_input_as_lines(__file__, "input.txt")
 
     # print(f"day {day} part 1, test input")
     sol = part1(test_input)
+    print(sol)
     if sol == 13:
         print(f"day {day} test input still correct solution")
     else:
         print(f"you broke day {day} test input")
 
-    # print(f"day {day} part 1, input")
+    print(f"day {day} part 1, input")
     part1_start = time.time()
     sol = part1(puzzle_input)
     part1_end = time.time()

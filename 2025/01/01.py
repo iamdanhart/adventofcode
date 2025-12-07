@@ -1,10 +1,6 @@
-
+from util.aoc_utils import read_day_input_as_lines
 
 dial_positions = [x for x in range(0, 100)]
-
-def read_input(filename):
-    with open(filename, 'r') as f:
-        return [x.rstrip('\n') for x in f.readlines()]
 
 def move_dial_day1(start_position, direction, distance) -> int:
     if direction == 'L':
@@ -54,8 +50,8 @@ def day2(puzzle_input: list[str]):
 
 
 def main():
-    test_input = read_input("testinput.txt")
-    puzzle_input = read_input("input.txt")
+    test_input = read_day_input_as_lines(__file__, "testinput.txt")
+    puzzle_input = read_day_input_as_lines(__file__, "input.txt")
 
     print("day 1, test input")
     day1(test_input)

@@ -1,11 +1,10 @@
 import itertools
 import time
 
+from util.aoc_utils import read_day_input_as_lines
+
 day = 3
 
-def read_input(filename) -> list[str]:
-    with open(filename, 'r') as f:
-        return [x.rstrip('\n') for x in f.readlines()]
 
 def find_max_jolts(joltages: list[str], current_combo: str, starting_pos) -> int:
     if len(current_combo) == 12:
@@ -43,8 +42,8 @@ def part2(puzzle_input: list[str]):
 
 
 def main():
-    test_input = read_input("testinput.txt")
-    puzzle_input = read_input("input.txt")
+    test_input = read_day_input_as_lines(__file__, "testinput.txt")
+    puzzle_input = read_day_input_as_lines(__file__, "input.txt")
 
     print(f"day {day} part 1, test input")
     sol = part1(test_input)

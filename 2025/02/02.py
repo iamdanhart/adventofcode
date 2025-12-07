@@ -1,8 +1,7 @@
 import time
 
-def read_input(filename) -> list[str]:
-    with open(filename, 'r') as f:
-        return [x.rstrip('\n') for x in f.readlines()]
+from util.aoc_utils import read_day_input_as_lines
+
 
 def split_into_substrings(input: str, length: int) -> list[str]:
     substrings: list[str] = []
@@ -73,8 +72,8 @@ def day2(puzzle_input: list[str]):
 
 
 def main():
-    test_input = read_input("testinput.txt")
-    puzzle_input = read_input("input.txt")
+    test_input = read_day_input_as_lines(__file__, "testinput.txt")
+    puzzle_input = read_day_input_as_lines(__file__, "input.txt")
 
     print("day 1, test input")
     sol = day1(test_input)
