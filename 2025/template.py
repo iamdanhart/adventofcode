@@ -27,7 +27,7 @@ def main():
 
     sol = part1(test_input)
     if expected_part1_test_sol and sol == expected_part1_test_sol:
-        print(f"day {day} part 1test input still correct solution")
+        print(f"day {day} part 1 test input still correct solution")
     elif expected_part1_test_sol:
         print(f"you broke day {day} part1 test input")
 
