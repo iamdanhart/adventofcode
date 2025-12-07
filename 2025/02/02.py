@@ -1,14 +1,7 @@
 import time
 
-from util.aoc_utils import read_day_input_as_lines
+from util.aoc_utils import read_day_input_as_lines, split_into_substrings
 
-
-def split_into_substrings(input: str, length: int) -> list[str]:
-    substrings: list[str] = []
-    for i in range(0, len(input), length):
-        substrings.append(input[i:i + length])
-
-    return substrings
 
 def contains_cycle_repeated_at_least_twice(val: int) -> bool:
     val_str: str = str(val)
